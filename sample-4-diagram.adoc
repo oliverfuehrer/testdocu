@@ -6,10 +6,10 @@
 
 == System Context Diagramm (C4)
 
-Das folgende Diagramm zeigt das System Context Diagramm für das Beispielprojekt. Die Diagrammbeschreibung befindet sich in der Datei sample-4-diagram.mmd.
+Das folgende Diagramm zeigt das System Context Diagramm für das Beispielprojekt.
 
-[mermaid,file=sample-4-diagram.mmd]
-----
+[mermaid]
+....
 C4Context
     title System Context Diagram für Beispielprojekt
     Person(user, "Benutzer", "Verwendet das System")
@@ -18,5 +18,4 @@ C4Context
 
     Rel(user, system, "Verwendet")
     Rel(system, email, "Sendet Benachrichtigungen über")
-----
-
+....
