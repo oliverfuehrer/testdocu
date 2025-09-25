@@ -1,0 +1,160 @@
+= Mermaid Diagram Samples
+:toc:
+:sectnums:
+:mermaid-format: svg
+
+== C4 Context Diagram
+[mermaid, c4-context, format={mermaid-format}]
+----
+C4Context
+  title System Context
+  Person(user, "User", "Interacts with the system")
+  System(system, "Example System", "Provides core features")
+  System_Ext(ext, "External Service", "3rd-party API")
+  Rel(user, system, "Uses")
+  Rel(system, ext, "Calls API", "HTTPS")
+----
+
+== C4 Container Diagram
+[mermaid, c4-container, format={mermaid-format}]
+----
+C4Container
+  title Container Diagram
+  Person(user, "User")
+  System_Boundary(sys, "Example System") {
+    Container(web, "Web App", "SPA", "Delivers UI")
+    Container(api, "API Service", "Spring Boot", "Business logic")
+    ContainerDb(db, "Database", "PostgreSQL", "Stores data")
+  }
+  Rel(user, web, "Uses", "HTTPS")
+  Rel(web, api, "Calls", "REST/JSON")
+  Rel(api, db, "Reads/Writes", "JDBC")
+----
+
+== C4 Component Diagram
+[mermaid, c4-component, format={mermaid-format}]
+----
+C4Component
+  title API Components
+  Container_Boundary(api, "API Service") {
+    Component(ctrl, "OrderController", "Spring MVC", "Handles requests")
+    Component(svc, "OrderService", "Java", "Business logic")
+    Component(repo, "OrderRepository", "Spring Data", "DB access")
+  }
+  Rel(ctrl, svc, "Uses")
+  Rel(svc, repo, "Uses")
+----
+
+== C4 Dynamic Diagram
+[mermaid, c4-dynamic, format={mermaid-format}]
+----
+C4Dynamic
+  title Checkout Flow
+  Person(user, "User")
+  Container(web, "Web App", "SPA")
+  Container(api, "API Service", "Spring Boot")
+  ContainerDb(db, "Database", "PostgreSQL")
+  Rel_D(user, web, "Clicks Checkout")
+  Rel_D(web, api, "POST /orders")
+  Rel_D(api, db, "INSERT order")
+  Rel_D(api, web, "201 Created")
+----
+
+== C4 Deployment Diagram
+[mermaid, c4-deployment, format={mermaid-format}]
+----
+C4Deployment
+  title Production Deployment
+  Deployment_Node(edge, "User Device", "Browser") {
+    Container(spa, "SPA", "JavaScript")
+  }
+  Deployment_Node(dc, "Datacenter") {
+    Deployment_Node(app, "App Server", "Ubuntu") {
+      Container(api, "API Service", "Spring Boot")
+    }
+    Deployment_Node(dbn, "DB Server", "PostgreSQL") {
+      ContainerDb(db, "Database", "PostgreSQL")
+    }
+  }
+  Rel(spa, api, "Calls", "HTTPS")
+  Rel(api, db, "Reads/Writes", "JDBC")
+----
+
+== Sequence Diagram
+[mermaid, sequence, format={mermaid-format}]
+----
+sequenceDiagram
+  actor User as User
+  participant Web as Web App
+  participant API as Auth API
+  participant IdP as Identity Provider
+
+  User->>Web: Open login page
+  Web->>API: POST /auth/start
+  API->>IdP: OIDC Authorization Request
+  IdP-->>User: Login form
+  User->>IdP: Credentials
+  IdP-->>API: Authorization Code
+  API->>IdP: Token request (code)
+  IdP-->>API: ID/Access tokens (JWT)
+  API-->>Web: Session established
+  Web-->>User: Redirect to dashboard
+----
+
+== Flowchart
+[mermaid, flowchart, format={mermaid-format}]
+----
+flowchart TD
+  A[Start] --> B{Is it sunny?}
+  B -- Yes --> C[Go outside]
+  B -- No --> D[Stay inside]
+  C --> E[Have fun]
+  D --> E
+----
+
+== Gantt Chart
+[mermaid, gantt, format={mermaid-format}]
+----
+gantt
+  title Project Timeline
+  dateFormat  YYYY-MM-DD
+  section Planning
+    Spec out requirements :done, 2025-09-01, 3d
+    Design architecture   :active, 2025-09-04, 5d
+  section Implementation
+    Develop features      : 2025-09-09, 10d
+    Testing              : 2025-09-19, 5d
+  section Deployment
+    Release              : 2025-09-24, 1d
+----
+
+== Pie Chart
+[mermaid, pie, format={mermaid-format}]
+----
+pie
+  title Project Distribution
+  "Frontend" : 40
+  "Backend" : 35
+  "DevOps" : 25
+----
+
+== State Diagram
+[mermaid, state, format={mermaid-format}]
+----
+stateDiagram-v2
+  [*] --> Idle
+  Idle --> Loading : Start
+  Loading --> Success : Data loaded
+  Loading --> Error : Failure
+  Success --> [*]
+  Error --> [*]
+----
+
+== Entity Relationship Diagram
+[mermaid, er, format={mermaid-format}]
+----
+erDiagram
+  CUSTOMER ||--o{ ORDER : places
+  ORDER ||--|{ LINE_ITEM : contains
+  CUSTOMER }|..|{ DELIVERY_ADDRESS : uses
+----
