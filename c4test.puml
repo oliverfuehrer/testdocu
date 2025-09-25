@@ -1,0 +1,33 @@
+@startuml sample-c4
+' pull C4 macros directly from upstream (no local files needed)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+' layout and style helpers (optional but helpful)
+LAYOUT_TOP_DOWN()
+HIDE_STEREOTYPE()
+LAYOUT_WITH_LEGEND()
+SHOW_LEGEND()
+
+title Example System – Container Diagram
+
+' people and external systems
+Person(User, "User", "Interacts with the system")
+System_Ext(ExtPay, "Payment Provider", "External payment API")
+
+' system boundary and containers
+System_Boundary(System, "Example System") {
+  Container(Web, "Web App", "SPA (React)", "Delivers UI")
+  Container(Api, "API Service", "Spring Boot", "Business logic and REST APIs")
+  ContainerDb(DB, "Database", "PostgreSQL", "Stores transactional data")
+  ContainerQueue(Queue, "Event Bus", "Kafka", "Order and payment events")
+}
+
+' relationships
+Rel(User, Web, "Uses", "HTTPS")
+Rel(Web, Api, "Calls", "REST/JSON")
+Rel(Api, DB, "Reads/Writes", "JDBC")
+Rel(Api, Queue, "Publishes", "Avro")
+Rel(Api, ExtPay, "Charge / refund", "HTTPS")
+Rel_Back(ExtPay, Api, "Webhook events", "HTTPS")
+
+@enduml
