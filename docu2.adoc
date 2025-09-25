@@ -4,7 +4,7 @@
 
 == C4 Context
 ifdef::env-github[[source,mermaid]]
-ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
+ifndef::env-github[[mermaid, format={mermaid-format}]]
 ....
 C4Context
 title System Context
@@ -17,7 +17,7 @@ Rel(system, ext, "Calls API", "HTTPS")
 
 == C4 Container
 ifdef::env-github[[source,mermaid]]
-ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
+ifndef::env-github[[mermaid, format={mermaid-format}]]
 ....
 C4Container
 title Container Diagram
@@ -34,7 +34,7 @@ Rel(api, db, "Reads/Writes", "JDBC")
 
 == C4 Component
 ifdef::env-github[[source,mermaid]]
-ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
+ifndef::env-github[[mermaid, format={mermaid-format}]]
 ....
 C4Component
 title API Components
@@ -49,7 +49,7 @@ Rel(svc, repo, "Uses")
 
 == C4 Dynamic
 ifdef::env-github[[source,mermaid]]
-ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
+ifndef::env-github[[mermaid, format={mermaid-format}]]
 ....
 C4Dynamic
 title Checkout Flow
@@ -65,7 +65,7 @@ Rel_D(api, web, "201 Created")
 
 == C4 Deployment
 ifdef::env-github[[source,mermaid]]
-ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
+ifndef::env-github[[mermaid, format={mermaid-format}]]
 ....
 C4Deployment
 title Production Deployment

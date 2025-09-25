@@ -19,7 +19,7 @@ See also xref:docu2.adoc[Mermaid C4 Samples].
 
 == System Context (C4)
 ifdef::env-github[[source,mermaid]]
-ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
+ifndef::env-github[[mermaid, format={mermaid-format}]]
 ----
 C4Context
   title System Context
@@ -31,7 +31,7 @@ C4Context
 ----
 == System Context (C4)
 ifdef::env-github[[source,mermaid]]
-ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
+ifndef::env-github[[mermaid, format={mermaid-format}]]
 ----
 C4Container
   title Container Diagram
@@ -46,7 +46,7 @@ C4Container
   Rel(api, db, "Reads/Writes", "JDBC")
 ----
 ifdef::env-github[[source,mermaid]]
-ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
+ifndef::env-github[[mermaid, format={mermaid-format}]]
 ....
 C4Container
   title Container Diagram
@@ -62,7 +62,7 @@ C4Container
 ....
 == Login Flow (sequence)
 ifdef::env-github[[source,mermaid]]
-ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
+ifndef::env-github[[mermaid, format={mermaid-format}]]
 ----
 sequenceDiagram
   actor User as User
