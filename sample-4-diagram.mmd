@@ -1,0 +1,8 @@
+C4Context
+    title System Context Diagram für Beispielprojekt
+    Person(user, "Benutzer", "Verwendet das System")
+    System(system, "Beispiel-System", "Das zu entwickelnde System")
+    System_Ext(email, "E-Mail-System", "Externer E-Mail-Dienst")
+
+    Rel(user, system, "Verwendet")
+    Rel(system, email, "Sendet Benachrichtigungen über")
