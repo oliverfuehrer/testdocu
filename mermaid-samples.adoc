@@ -4,7 +4,8 @@
 :mermaid-format: svg
 
 == C4 Context Diagram
-[mermaid, c4-context, format={mermaid-format}]
+ifdef::env-github[[source,mermaid]]
+ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
 ----
 C4Context
   title System Context
@@ -16,7 +17,8 @@ C4Context
 ----
 
 == C4 Container Diagram
-[mermaid, c4-container, format={mermaid-format}]
+ifdef::env-github[[source,mermaid]]
+ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
 ----
 C4Container
   title Container Diagram
@@ -32,7 +34,8 @@ C4Container
 ----
 
 == C4 Component Diagram
-[mermaid, c4-component, format={mermaid-format}]
+ifdef::env-github[[source,mermaid]]
+ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
 ----
 C4Component
   title API Components
@@ -46,7 +49,8 @@ C4Component
 ----
 
 == C4 Dynamic Diagram
-[mermaid, c4-dynamic, format={mermaid-format}]
+ifdef::env-github[[source,mermaid]]
+ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
 ----
 C4Dynamic
   title Checkout Flow
@@ -61,7 +65,8 @@ C4Dynamic
 ----
 
 == C4 Deployment Diagram
-[mermaid, c4-deployment, format={mermaid-format}]
+ifdef::env-github[[source,mermaid]]
+ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
 ----
 C4Deployment
   title Production Deployment
@@ -81,7 +86,8 @@ C4Deployment
 ----
 
 == Sequence Diagram
-[mermaid, sequence, format={mermaid-format}]
+ifdef::env-github[[source,mermaid]]
+ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
 ----
 sequenceDiagram
   actor User as User
@@ -102,7 +108,8 @@ sequenceDiagram
 ----
 
 == Flowchart
-[mermaid, flowchart, format={mermaid-format}]
+ifdef::env-github[[source,mermaid]]
+ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
 ----
 flowchart TD
   A[Start] --> B{Is it sunny?}
@@ -113,7 +120,8 @@ flowchart TD
 ----
 
 == Gantt Chart
-[mermaid, gantt, format={mermaid-format}]
+ifdef::env-github[[source,mermaid]]
+ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
 ----
 gantt
   title Project Timeline
@@ -129,7 +137,8 @@ gantt
 ----
 
 == Pie Chart
-[mermaid, pie, format={mermaid-format}]
+ifdef::env-github[[source,mermaid]]
+ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
 ----
 pie
   title Project Distribution
@@ -139,7 +148,8 @@ pie
 ----
 
 == State Diagram
-[mermaid, state, format={mermaid-format}]
+ifdef::env-github[[source,mermaid]]
+ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
 ----
 stateDiagram-v2
   [*] --> Idle
@@ -151,7 +161,8 @@ stateDiagram-v2
 ----
 
 == Entity Relationship Diagram
-[mermaid, er, format={mermaid-format}]
+ifdef::env-github[[source,mermaid]]
+ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
 ----
 erDiagram
   CUSTOMER ||--o{ ORDER : places
