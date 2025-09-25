@@ -20,20 +20,11 @@ This document demonstrates Mermaid C4 and sequence diagrams rendered locally via
 
 ifdef::env-github[]
 [source,mermaid]
-----
-C4Context
-  title System Context
-  Person(user, "User", "Interacts with the system")
-  System(system, "Example System", "Provides core capabilities")
-  System_Ext(ext, "External Service", "Third-party integration")
-  Rel(user, system, "Uses")
-  Rel(system, ext, "Calls API", "HTTPS")
-----
 endif::[]
-
 ifndef::env-github[]
 [mermaid, c4-context, format={mermaid-format}]
-....
+endif::[]
+----
 C4Context
   title System Context
   Person(user, "User", "Interacts with the system")
@@ -41,8 +32,8 @@ C4Context
   System_Ext(ext, "External Service", "Third-party integration")
   Rel(user, system, "Uses")
   Rel(system, ext, "Calls API", "HTTPS")
-....
-endif::[]
+----
+
 
 // -------- C4: Container --------
 == Container View (C4)
