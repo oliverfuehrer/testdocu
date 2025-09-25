@@ -1,0 +1,89 @@
+= Project Architecture
+:toc:
+:icons: font
+:sectanchors:
+:sectnums:
+:mermaid-format: svg
+
+// Option A: Local rendering with Asciidoctor Diagram
+// Requires: asciidoctor-diagram installed/enabled in the toolchain.
+// Docs: https://docs.asciidoctor.org/diagram-extension/latest/diagram_types/mermaid/
+ifdef::backend-html5[]
+:imagesoutdir: ./images
+endif::[]
+
+// Option B: Remote rendering with Kroki (works without local mermaid)
+// Requires: asciidoctor-kroki extension or Kroki server.
+// https://github.com/asciidoctor/asciidoctor-kroki
+// Uncomment the next attribute if using a Kroki server
+// :kroki-server-url: https://kroki.io
+
+== About this document
+This document embeds Mermaid C4 diagrams using either Asciidoctor Diagram or Kroki for local builds, and falls back to GitHub-compatible rendering for repository previews. [web:1][web:17][web:16][web:5]
+
+// -------- GitHub vs Local toggle --------
+// GitHub renders Mermaid only inside [source,mermaid] code blocks.
+// Local builds with Asciidoctor Diagram/Kroki prefer [mermaid] blocks.
+== System Context (C4)
+
+ifdef::env-github[]
+[source,mermaid]
+----
+C4Context
+  title System Context
+  Person(user, "User", "Interacts with the system")
+  System(system, "Example System", "Provides core capabilities")
+  System_Ext(ext, "External Service", "Third-party integration")
+  Rel(user, system, "Uses")
+  Rel(system, ext, "Calls API", "HTTPS")
+----
+endif::[]
+
+ifndef::env-github[]
+[mermaid, c4-context, format={mermaid-format}]
+....
+C4Context
+  title System Context
+  Person(user, "User", "Interacts with the system")
+  System(system, "Example System", "Provides core capabilities")
+  System_Ext(ext, "External Service", "Third-party integration")
+  Rel(user, system, "Uses")
+  Rel(system, ext, "Calls API", "HTTPS")
+....
+endif::[]
+
+== Container View (C4)
+
+ifdef::env-github[]
+[source,mermaid]
+----
+C4Container
+  title Container Diagram
+  Person(user, "User", "Interacts with the system")
+  System_Boundary(system, "Example System") {
+    Container(web, "Web App", "SPA", "Delivers UI")
+    Container(api, "API Service", "Spring Boot", "Business logic and APIs")
+    ContainerDb(db, "Database", "PostgreSQL", "Stores data")
+  }
+  Rel(user, web, "Uses", "HTTPS")
+  Rel(web, api, "Calls", "REST/JSON")
+  Rel(api, db, "Reads/Writes", "JDBC")
+----
+endif::[]
+
+ifndef::env-github[]
+[mermaid, c4-container, format={mermaid-format}]
+....
+C4Container
+  title Container Diagram
+  Person(user, "User", "Interacts with the system")
+  System_Boundary(system, "Example System") {
+    Container(web, "Web App", "SPA", "Delivers UI")
+    Container(api, "API Service", "Spring Boot", "Business logic and APIs")
+    ContainerDb(db, "Database", "PostgreSQL", "Stores data")
+  }
+  Rel(user, web, "Uses", "HTTPS")
+  Rel(web, api, "Calls", "REST/JSON")
+  Rel(api, db, "Reads/Writes", "JDBC")
+....
+endif::[]
