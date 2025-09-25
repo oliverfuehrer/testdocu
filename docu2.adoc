@@ -8,18 +8,6 @@
 
 == C4 Context
 
-[source,mermaid]
-----
-C4Context
-title System Context
-Person(user, "User", "Interacts with the system")
-System(system, "Example System", "Provides core features")
-System_Ext(ext, "External Service", "3rd-party API")
-Rel(user, system, "Uses")
-Rel(system, ext, "Calls API", "HTTPS")
-----
-
-ifndef::env-github[]
 [mermaid]
 ....
 C4Context
@@ -30,28 +18,9 @@ System_Ext(ext, "External Service", "3rd-party API")
 Rel(user, system, "Uses")
 Rel(system, ext, "Calls API", "HTTPS")
 ....
-endif::[]
 
 == C4 Container
 
-ifdef::env-github[]
-[source,mermaid]
-----
-C4Container
-title Container Diagram
-Person(user, "User")
-System_Boundary(sys, "Example System") {
-  Container(web, "Web App", "SPA", "Delivers UI")
-  Container(api, "API Service", "Spring Boot", "Business logic")
-  ContainerDb(db, "Database", "PostgreSQL", "Stores data")
-}
-Rel(user, web, "Uses", "HTTPS")
-Rel(web, api, "Calls", "REST/JSON")
-Rel(api, db, "Reads/Writes", "JDBC")
-----
-endif::[]
-
-ifndef::env-github[]
 [mermaid]
 ....
 C4Container
@@ -66,26 +35,8 @@ Rel(user, web, "Uses", "HTTPS")
 Rel(web, api, "Calls", "REST/JSON")
 Rel(api, db, "Reads/Writes", "JDBC")
 ....
-endif::[]
 
 == C4 Component
-
-ifdef::env-github[]
-[source,mermaid]
-----
-C4Component
-title API Components
-Container_Boundary(api, "API Service") {
-  Component(ctrl, "OrderController", "Spring MVC", "Handles requests")
-  Component(svc, "OrderService", "Java", "Business logic")
-  Component(repo, "OrderRepository", "Spring Data", "DB access")
-}
-Rel(ctrl, svc, "Uses")
-Rel(svc, repo, "Uses")
-----
-endif::[]
-
-ifndef::env-github[]
 [mermaid]
 ....
 C4Component
@@ -98,27 +49,9 @@ Container_Boundary(api, "API Service") {
 Rel(ctrl, svc, "Uses")
 Rel(svc, repo, "Uses")
 ....
-endif::[]
 
 == C4 Dynamic
 
-ifdef::env-github[]
-[source,mermaid]
-----
-C4Dynamic
-title Checkout Flow
-Person(user, "User")
-Container(web, "Web App", "SPA")
-Container(api, "API Service", "Spring Boot")
-ContainerDb(db, "Database", "PostgreSQL")
-Rel_D(user, web, "Clicks Checkout")
-Rel_D(web, api, "POST /orders")
-Rel_D(api, db, "INSERT order")
-Rel_D(api, web, "201 Created")
-----
-endif::[]
-
-ifndef::env-github[]
 [mermaid]
 ....
 C4Dynamic
@@ -132,32 +65,9 @@ Rel_D(web, api, "POST /orders")
 Rel_D(api, db, "INSERT order")
 Rel_D(api, web, "201 Created")
 ....
-endif::[]
 
 == C4 Deployment
 
-ifdef::env-github[]
-[source,mermaid]
-----
-C4Deployment
-title Production Deployment
-Deployment_Node(edge, "User Device", "Browser") {
-  Container(spa, "SPA", "JavaScript")
-}
-Deployment_Node(dc, "Datacenter") {
-  Deployment_Node(app, "App Server", "Ubuntu") {
-    Container(api, "API Service", "Spring Boot")
-  }
-  Deployment_Node(dbn, "DB Server", "PostgreSQL") {
-    ContainerDb(db, "Database", "PostgreSQL")
-  }
-}
-Rel(spa, api, "Calls", "HTTPS")
-Rel(api, db, "Reads/Writes", "JDBC")
-----
-endif::[]
-
-ifndef::env-github[]
 [mermaid]
 ....
 C4Deployment
@@ -176,4 +86,3 @@ Deployment_Node(dc, "Datacenter") {
 Rel(spa, api, "Calls", "HTTPS")
 Rel(api, db, "Reads/Writes", "JDBC")
 ....
-endif::[]
