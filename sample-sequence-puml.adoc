@@ -1,0 +1,19 @@
+= Beispiel AsciiDoc mit integriertem PlantUML Sequenzdiagramm
+:toc:
+:icons: font
+:source-highlighter: coderay
+:plantuml:
+
+== Einfache Sequenz
+
+[plantuml,format=svg]
+....
+@startuml
+actor Alice
+actor Bob
+Alice -> Bob: Hallo Bob, wie geht's?
+Bob --> Alice: Mir geht's gut, danke!
+Alice -> Bob: Schön zu hören.
+@enduml
+....
+
