@@ -1,0 +1,22 @@
+= C4 System Context Diagramm Beispiel
+:toc:
+:icons: font
+:source-highlighter: coderay
+:mermaid:
+
+== System Context Diagramm (C4)
+
+Das folgende Diagramm zeigt das System Context Diagramm für das Beispielprojekt. Die Diagrammbeschreibung befindet sich in der Datei sample-4-diagram.mmd.
+
+[mermaid,file=sample-4-diagram.mmd]
+----
+C4Context
+    title System Context Diagram für Beispielprojekt
+    Person(user, "Benutzer", "Verwendet das System")
+    System(system, "Beispiel-System", "Das zu entwickelnde System")
+    System_Ext(email, "E-Mail-System", "Externer E-Mail-Dienst")
+
+    Rel(user, system, "Verwendet")
+    Rel(system, email, "Sendet Benachrichtigungen über")
+----
+
