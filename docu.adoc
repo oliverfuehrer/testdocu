@@ -14,6 +14,9 @@ endif::[]
 
 == About
 This document demonstrates Mermaid C4 and sequence diagrams rendered locally via Asciidoctor Diagram or Kroki, and on GitHub via mermaid code blocks. [web:1][web:17][web:16][web:5]
+
+See also xref:docu2.adoc[Mermaid C4 Samples].
+
 == System Context (C4)
 ifdef::env-github[[source,mermaid]]
 ifndef::env-github[[mermaid, seq-login, format={mermaid-format}]]
