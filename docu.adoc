@@ -4,10 +4,26 @@
 :sectanchors:
 :sectnums:
 :mermaid-format: svg
+// Uncomment to use a remote Kroki server instead of local rendering
+// :kroki-server-url: https://kroki.io
+
+// For local builds with Asciidoctor Diagram, ensure the extension is enabled.
+ifdef::backend-html5[]
+:imagesoutdir: ./images
+endif::[]
+
 == About
 This document demonstrates Mermaid C4 and sequence diagrams rendered locally via Asciidoctor Diagram or Kroki, and on GitHub via mermaid code blocks. [web:1][web:17][web:16][web:5]
+
+// -------- C4: System Context --------
 == System Context (C4)
+
+ifdef::env-github[]
+[source,mermaid]
+endif::[]
+ifndef::env-github[]
 [mermaid, c4-context, format={mermaid-format}]
+endif::[]
 ----
 C4Context
   title System Context
@@ -17,7 +33,29 @@ C4Context
   Rel(user, system, "Uses")
   Rel(system, ext, "Calls API", "HTTPS")
 ----
+
+
+// -------- C4: Container --------
 == Container View (C4)
+
+ifdef::env-github[]
+[source,mermaid]
+----
+C4Container
+  title Container Diagram
+  Person(user, "User", "Interacts with the system")
+  System_Boundary(system, "Example System") {
+    Container(web, "Web App", "SPA", "Delivers UI")
+    Container(api, "API Service", "Spring Boot", "Business logic and APIs")
+    ContainerDb(db, "Database", "PostgreSQL", "Stores data")
+  }
+  Rel(user, web, "Uses", "HTTPS")
+  Rel(web, api, "Calls", "REST/JSON")
+  Rel(api, db, "Reads/Writes", "JDBC")
+----
+endif::[]
+
+ifndef::env-github[]
 [mermaid, c4-container, format={mermaid-format}]
 ....
 C4Container
@@ -32,7 +70,38 @@ C4Container
   Rel(web, api, "Calls", "REST/JSON")
   Rel(api, db, "Reads/Writes", "JDBC")
 ....
-== Sequence View (C4)
+endif::[]
+
+
+
+
+
+// -------- Sequence Diagram --------
+== Login Flow (sequence)
+
+ifdef::env-github[]
+[source,mermaid]
+----
+sequenceDiagram
+  actor User as User
+  participant Web as Web App
+  participant API as Auth API
+  participant IdP as Identity Provider
+
+  User->>Web: Open login page
+  Web->>API: POST /auth/start
+  API->>IdP: OIDC Authorization Request
+  IdP-->>User: Login form
+  User->>IdP: Credentials
+  IdP-->>API: Authorization Code
+  API->>IdP: Token request (code)
+  IdP-->>API: ID/Access tokens (JWT)
+  API-->>Web: Session established
+  Web-->>User: Redirect to dashboard
+----
+endif::[]
+
+ifndef::env-github[]
 [mermaid, seq-login, format={mermaid-format}]
 ....
 sequenceDiagram
@@ -40,6 +109,7 @@ sequenceDiagram
   participant Web as Web App
   participant API as Auth API
   participant IdP as Identity Provider
+
   User->>Web: Open login page
   Web->>API: POST /auth/start
   API->>IdP: OIDC Authorization Request
@@ -51,3 +121,4 @@ sequenceDiagram
   API-->>Web: Session established
   Web-->>User: Redirect to dashboard
 ....
+endif::[]
