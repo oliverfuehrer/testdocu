@@ -1,0 +1,9 @@
+sequenceDiagram
+    participant User
+    participant App
+    participant DB
+
+    User->>App: Anfrage senden
+    App->>DB: Daten abfragen
+    DB-->>App: Daten zurückgeben
+    App-->>User: Antwort senden
