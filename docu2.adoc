@@ -83,3 +83,288 @@ Deployment_Node(dc, "Datacenter") {
 Rel(spa, api, "Calls", "HTTPS")
 Rel(api, db, "Reads/Writes", "JDBC")
 ....
+
+== DRMD
+ifdef::env-github[[source,mermaid]]
+ifndef::env-github[[mermaid, format={mermaid-format}]]
+....
+classDiagram
+direction BT
+class DATABASECHANGELOG {
+   varchar(255) ID
+   varchar(255) AUTHOR
+   varchar(255) FILENAME
+   datetime DATEEXECUTED
+   int ORDEREXECUTED
+   varchar(10) EXECTYPE
+   varchar(35) MD5SUM
+   varchar(255) DESCRIPTION
+   varchar(255) COMMENTS
+   varchar(255) TAG
+   varchar(20) LIQUIBASE
+   varchar(255) CONTEXTS
+   varchar(255) LABELS
+   varchar(10) DEPLOYMENT_ID
+}
+class DATABASECHANGELOGLOCK {
+   tinyint LOCKED
+   datetime LOCKGRANTED
+   varchar(255) LOCKEDBY
+   int ID
+}
+class affected_ecu {
+   varchar(255) diagnostic_address
+   varchar(255) ecu_name
+   varchar(255) tn
+   varchar(50) hw_version
+   varchar(50) sw_version
+   timestamp(3) last_update
+   varchar(255) maturity_level
+   varchar(255) ouc_file
+   varchar(255) odx_file_linked
+   varchar(255) file_size
+   varchar(255) energy_consumption
+   varchar(255) flash_duration
+   varchar(1) is_ecu_selected
+   int release_affected_eculist_id
+   timestamp(3) oemil_update_time
+   varchar(255) oemil_ecu_name
+   varchar(255) oemil_tn
+   varchar(50) oemil_hw_version
+   varchar(50) oemil_sw_version
+   timestamp(3) oemil_last_update
+   varchar(255) oemil_maturity_level
+   varchar(255) oemil_ouc_file
+   varchar(255) oemil_odx_file_linked
+   varchar(255) oemil_file_size
+   varchar(255) oemil_energy_consumption
+   varchar(255) oemil_flash_duration
+   int id
+}
+class affected_ecus_template_config {
+   int technology_config_id
+   varchar(255) diagnostic_address
+   varchar(255) ecu_name_manual
+   varchar(255) tn_manual
+   varchar(255) hw_version_manual
+   varchar(255) sw_version_manual
+   varchar(255) maturity_level
+   varchar(255) ouc_file
+   varchar(255) odx_file_linked
+   varchar(255) file_size
+   varchar(255) energy_consumption
+   varchar(255) flash_duration
+   int id
+}
+class approval_template_config {
+   longtext template_json
+   timestamp(3) update_time
+   timestamp(3) creation_time
+   int technology_config_id
+   int brand_id
+   int id
+}
+class brand_config {
+   varchar(50) name
+   varchar(255) path
+   int id
+}
+class brand_technology_config {
+   int technology_config_id
+   int brand_id
+   int id
+}
+class deliverable {
+   int milestone_id
+   varchar(150) title_de
+   varchar(150) title_en
+   longtext description_de
+   longtext description_en
+   int document_container_id
+   varchar(50) state
+   longtext confirm_reason
+   longtext reset_reason
+   timestamp(3) update_time
+   varchar(100) deliverable_role
+   int id
+}
+class document_container {
+   varchar(150) title_de
+   varchar(150) title_en
+   int release_id
+   int id
+}
+class ink {
+   int document_container_id
+   longtext name
+   longtext url
+   timestamp(3) creation_date
+   int id
+}
+class market_region_config {
+   varchar(150) market_region
+   int id
+}
+class market_region_use {
+   int release_id
+   int market_id
+   int id
+}
+class milestone {
+   varchar(150) title_de
+   varchar(150) title_en
+   varchar(50) target_date
+   varchar(50) state
+   longtext confirm_reason
+   longtext reset_reason
+   timestamp(3) update_time
+   int release_id
+   varchar(50) milestone_type
+   longtext milestone_description_de
+   longtext milestone_description_en
+   int id
+}
+class related_person {
+   int release_id
+   varchar(50) rolename
+   varchar(255) user_id
+   varchar(255) departments
+   varchar(255) responsible_for
+   int id
+}
+class release {
+   int technology_config_id
+   varchar(150) release_id_text
+   varchar(50) oru4_orunext_release_type
+   varchar(50) oru4_orunext_reason_for_update_type
+   varchar(50) oru3_plattform_type
+   varchar(150) orunext_reference_cluster
+   longtext dlcm_release_description
+   timestamp soss
+   varchar(150) release_responsible_user
+   varchar(150) avon_id
+   varchar(50) software_version_number
+   timestamp(3) update_time
+   int brand_id
+   varchar(50) template_version
+   varchar(50) status
+   longtext cancel_reason
+   varchar(255) r4c_identifier
+   varchar(50) r4c_status
+   timestamp(3) r4c_last_update
+   int id
+}
+class release_affected_eculist {
+   int release_id
+   varchar(50) name
+   varchar(50) baseline_uuid
+   varchar(50) baseline_id
+   timestamp(3) last_update
+   int vehicle_project_config_id
+   varchar(50) source_baseline_uuid
+   varchar(50) source_baseline_id
+   varchar(50) source_baseline_partnumber
+   varchar(50) source_baseline_revision
+   timestamp(3) oemil_update_time
+   int id
+}
+class release_document {
+   int release_id
+   tinyint mandatory
+   varchar(50) name
+   varchar(150) url
+   timestamp(3) creation_date
+   varchar(255) reference
+   varchar(255) description
+   timestamp(3) last_modified_date
+   int id
+}
+class requirement {
+   int deliverable_id
+   varchar(50) type
+   varchar(150) title_de
+   varchar(150) title_en
+   longtext description_de
+   longtext description_en
+   timestamp(3) creation_time
+   varchar(50) state
+   longtext confirm_reason
+   timestamp(3) update_time
+   varchar(50) ecu_attribute_name
+   longtext reset_reason
+   varchar(5000) reason_de
+   varchar(5000) reason_en
+   varchar(240) resp_role_for
+   int id
+}
+class requirement_evaluation {
+   int release_affected_eculist_id
+   int ecu_id
+   varchar(50) state
+   int requirement_id
+   int id
+}
+class risk {
+   int requirement_id
+   varchar(255) name
+   longtext description
+   varchar(50) aspect
+   varchar(50) impact
+   varchar(50) measurement
+   varchar(50) author
+   timestamp(3) date
+   longtext comment
+   varchar(50) source
+   int release_id
+   int id
+}
+class technology_config {
+   varchar(50) name
+   varchar(50) technology_type
+   varchar(50) ecu_list_type
+   int id
+}
+class vehicle_project_config {
+   varchar(150) name_de
+   varchar(150) name_en
+   varchar(50) product_id
+   int brand_id
+   int technology_id
+   int id
+}
+class vehicle_project_use {
+   int release_id
+   int vehicle_project_config_id
+   int id
+}
+
+affected_ecu  -->  release_affected_eculist : release_affected_eculist_id \--> id
+affected_ecus_template_config  -->  technology_config : technology_config_id \--> id
+approval_template_config  -->  brand_config : brand_id \--> id
+approval_template_config  -->  technology_config : technology_config_id \--> id
+brand_technology_config  -->  brand_config : brand_id \--> id
+brand_technology_config  -->  technology_config : technology_config_id \--> id
+deliverable  -->  document_container : document_container_id \--> id
+deliverable  -->  milestone : milestone_id \--> id
+document_container  -->  release : release_id \--> id
+ink  -->  document_container : document_container_id \--> id
+market_region_use  -->  market_region_config : market_id \--> id
+market_region_use  -->  release : release_id \--> id
+milestone  -->  release : release_id \--> id
+related_person  -->  release : release_id \--> id
+release  -->  brand_config : brand_id \--> id
+release  -->  technology_config : technology_config_id \--> id
+release_affected_eculist  -->  release : release_id \--> id
+release_affected_eculist  -->  vehicle_project_config : vehicle_project_config_id \--> id
+release_document  -->  release : release_id \--> id
+requirement  -->  deliverable : deliverable_id \--> id
+requirement_evaluation  -->  affected_ecu : ecu_id \--> id
+requirement_evaluation  -->  release_affected_eculist : release_affected_eculist_id \--> id
+requirement_evaluation  -->  requirement : requirement_id \--> id
+risk  -->  release : release_id \--> id
+risk  -->  requirement : requirement_id \--> id
+vehicle_project_config  -->  brand_config : brand_id \--> id
+vehicle_project_config  -->  technology_config : technology_id \--> id
+vehicle_project_use  -->  release : release_id \--> id
+vehicle_project_use  -->  vehicle_project_config : vehicle_project_config_id \--> id
+....
